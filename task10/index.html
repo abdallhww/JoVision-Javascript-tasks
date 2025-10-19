@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 10 - Get IP Button</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #222;
+      font-family: Arial, sans-serif;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #00bfff;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0099cc;
+    }
+  </style>
+</head>
+<body>
+  <button id="getIpBtn">Get ip</button>
+
+  <script>
+    const btn = document.getElementById("getIpBtn");
+
+    btn.addEventListener("click", () => {
+      fetch("https://api.ipify.org?format=json")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // تغيير نص الزر   IP 
+          btn.textContent = data.ip;
+        })
+        .catch(error => {
+          console.error("Error fetching IP:", error);
+          btn.textContent = "Error!";
+        });
+    });
+  </script>
+</body>
+</html>

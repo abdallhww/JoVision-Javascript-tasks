@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 6 - Array Methods</title>
+</head>
+<body>
+  <h2>Task 6 - Array Methods</h2>
+
+  <button id="btn1">Button 1 - Remove divisible by 3</button>
+  <button id="btn2">Button 2 - Add 100 to 150</button>
+  <button id="btn3">Button 3 - Add 3 to each element</button>
+  <button id="btn4">Button 4 - Print index 20 to 40</button>
+  <button id="btn5">Button 5 - Shuffle and sort</button>
+  
+  <script>
+    // 🔹 Function to create array from 0 to 100
+    function createArray() { 
+      const arr = [];
+      for (let i = 0; i <= 100; i++) {
+        arr.push(i);
+      }
+      return arr;
+    }
+
+    // 🔹 Function to shuffle an array
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    // 🔸 Button 1: Remove numbers divisible by 3
+    document.getElementById("btn1").addEventListener("click", () => {
+      let arr = createArray();
+      let filtered = arr.filter(num => num % 3 !== 0);
+      console.log("Numbers not divisible by 3:", filtered);
+    });
+
+    // 🔸 Button 2: Add numbers from 100 to 150
+    document.getElementById("btn2").addEventListener("click", () => {
+      let arr1 = createArray();
+      let arr2 = [];
+      for (let i = 101; i <= 150; i++) {
+        arr2.push(i);
+      }
+      let combined = arr1.concat(arr2);
+      console.log("Combined array 0-150:", combined);
+    });
+
+    // 🔸 Button 3: Add 3 to each array member
+    document.getElementById("btn3").addEventListener("click", () => {
+      let arr = createArray();
+      let newArr = arr.map(num => num + 3);
+      console.log("Array after adding 3:", newArr);
+    });
+
+    // 🔸 Button 4: Print elements from index 20 to 40
+    document.getElementById("btn4").addEventListener("click", () => {
+      let arr = createArray();
+      let sliced = arr.slice(20, 41); // index 20 → 40 inclusive
+      console.log("Numbers from index 20 to 40:", sliced);
+    });
+
+    // 🔸 Button 5: Shuffle and sort
+    document.getElementById("btn5").addEventListener("click", () => {
+      let arr = createArray();
+      shuffleArray(arr);
+      console.log("Shuffled array:", arr);
+      arr.sort((a, b) => b - a);
+      console.log("Sorted (descending) array:", arr);
+    });
+  </script>
+</body>
+</html>

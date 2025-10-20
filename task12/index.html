@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 12</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    input {
+      padding: 10px;
+      margin: 8px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      width: 250px;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 25px;
+      background-color: #00bfff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0099cc;
+      transform: scale(1.05);
+    }
+
+    .result-box {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+      display: none;
+    }
+
+    .result-box p {
+      margin: 8px 0;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter your details</h2>
+
+  <input type="text" id="nameField" placeholder="Name">
+  <input type="number" id="ageField" placeholder="Age">
+  <button id="submitBtn">Submit</button>
+
+  <div class="result-box" id="resultBox">
+    <p><strong>Your name:</strong> <span id="resultName"></span></p>
+    <p><strong>Your age:</strong> <span id="resultAge"></span></p>
+    <p><strong>Timestamp:</strong> <span id="resultTime"></span></p>
+  </div>
+
+  <script>
+    const submitBtn = document.getElementById("submitBtn");
+    const resultBox = document.getElementById("resultBox");
+    const resultName = document.getElementById("resultName");
+    const resultAge = document.getElementById("resultAge");
+    const resultTime = document.getElementById("resultTime");
+
+    submitBtn.addEventListener("click", function () {
+      const name = document.getElementById("nameField").value.trim();
+      const age = document.getElementById("ageField").value.trim();
+
+      if (!name || !age) {
+        alert("⚠️ Please fill in both Name and Age!");
+        return;
+      }
+
+      const namePattern = /^[a-zA-Z\s]+$/;
+      if (!namePattern.test(name)) {
+        alert("⚠️ Name should contain only letters!");
+        return;
+      }
+
+      if (isNaN(age) || age <= 0) {
+        alert("⚠️ Please enter a valid positive age!");
+        return;
+      }
+
+      const userInfo = {
+        name,
+        age,
+        timestamp: new Date().toLocaleString()
+      };
+
+      const { name: userName, age: userAge, timestamp } = userInfo;
+
+      alert(`Your name is: ${userName}\nYour age is: ${userAge}\nTimestamp: ${timestamp}`);
+
+      resultName.textContent = userName;
+      resultAge.textContent = userAge;
+      resultTime.textContent = timestamp;
+      resultBox.style.display = "block";
+    });
+  </script>
+</body>
+</html>

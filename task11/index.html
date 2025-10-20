@@ -36,7 +36,6 @@
 
     async function getIP() {
       try {
-        // لتجربة الأخطاء: ضع رابط خاطئ مثل: "https://api.ipify.orgx/?format=json"
         const response = await fetch("https://api.ipify.org?format=json");
         
         if (!response.ok) {

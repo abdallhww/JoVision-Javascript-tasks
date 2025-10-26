@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 13 - Agify API</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      margin: 8px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      width: 250px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 25px;
+      background-color: #00bfff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0099cc;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter Your Name</h2>
+  <input type="text" id="nameField" placeholder="Name">
+  <button id="submitBtn">Submit</button>
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      const name = document.getElementById("nameField").value.trim();
+
+      if (!name) {
+        alert("⚠️ Please enter your name first!");
+        return;
+      }
+
+      const apiUrl = `https://cors-anywhere.herokuapp.com/https://api.agify.io/?name=${name}`;
+
+
+      // إرسال الطلب  
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // تفكيك الكائن 
+          const { name, age } = data;
+
+          // عرض النتيجة  
+          alert(`Your name is: ${name}\nYour predicted age is: ${age}`);
+        })
+        .catch(error => {
+          alert("❌ Error fetching age: " + error.message);
+          console.error("Fetch Error:", error);
+        });
+    });
+  </script>
+
+</body>
+</html>
